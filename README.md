@@ -8,4 +8,4 @@ Notable features:
 * You can check transactions from all acount and not only main one
 * And you can see and copy **all** details about particular transaction with double click
 
-![/AssetsSources/screenshot.png]
+![screenshot](/AssetsSources/screenshot.png)
