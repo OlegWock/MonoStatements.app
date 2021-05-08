@@ -12,6 +12,8 @@
 		D1238415263EB2D800BE0F1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1238414263EB2D800BE0F1D /* Assets.xcassets */; };
 		D1238418263EB2D800BE0F1D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1238416263EB2D800BE0F1D /* Main.storyboard */; };
 		D1238422263EC5E300BE0F1D /* MonoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1238421263EC5E300BE0F1D /* MonoAPI.swift */; };
+		D12CFF95264417860095E315 /* StatementsTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = D12CFF94264417860095E315 /* StatementsTable.xib */; };
+		D12CFF98264418A50095E315 /* MonoStatementsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12CFF97264418A50095E315 /* MonoStatementsTable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		D1238419263EB2D800BE0F1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D123841A263EB2D800BE0F1D /* MonoStatements.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MonoStatements.entitlements; sourceTree = "<group>"; };
 		D1238421263EC5E300BE0F1D /* MonoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonoAPI.swift; sourceTree = "<group>"; };
+		D12CFF94264417860095E315 /* StatementsTable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatementsTable.xib; sourceTree = "<group>"; };
+		D12CFF97264418A50095E315 /* MonoStatementsTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonoStatementsTable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +66,8 @@
 				D1238419263EB2D800BE0F1D /* Info.plist */,
 				D123841A263EB2D800BE0F1D /* MonoStatements.entitlements */,
 				D1238421263EC5E300BE0F1D /* MonoAPI.swift */,
+				D12CFF94264417860095E315 /* StatementsTable.xib */,
+				D12CFF97264418A50095E315 /* MonoStatementsTable.swift */,
 			);
 			path = MonoStatements;
 			sourceTree = "<group>";
@@ -123,6 +129,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D12CFF95264417860095E315 /* StatementsTable.xib in Resources */,
 				D1238415263EB2D800BE0F1D /* Assets.xcassets in Resources */,
 				D1238418263EB2D800BE0F1D /* Main.storyboard in Resources */,
 			);
@@ -136,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1238422263EC5E300BE0F1D /* MonoAPI.swift in Sources */,
+				D12CFF98264418A50095E315 /* MonoStatementsTable.swift in Sources */,
 				D1238413263EB2D500BE0F1D /* ViewController.swift in Sources */,
 				D1238411263EB2D500BE0F1D /* AppDelegate.swift in Sources */,
 			);

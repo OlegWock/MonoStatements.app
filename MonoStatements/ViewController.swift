@@ -7,21 +7,27 @@
 
 import Cocoa
 
-class ViewController: NSViewController & NSTableViewDataSource & NSTableViewDelegate {
+class ViewController: NSViewController & NSTabViewDelegate & MonoStatementsTableDelegate {
 
     @IBOutlet weak var apiKeyField: NSTextField!
     @IBOutlet weak var fromDatePicker: NSDatePicker!
     @IBOutlet weak var pullButton: NSButton!
-    @IBOutlet weak var statementsTable: NSTableView!
+    @IBOutlet weak var tabs: NSTabView!
+    @IBOutlet weak var convertToSelect: NSPopUpButton!
+    // @IBOutlet weak var statementsTable: NSTableView!
     
     var api: MonoAPI?
     
-    var statements: [Statement] = []
+    var statementsTable: MonoStatementsTable?
+    
+    var userInfo: UserInfo?
+    var statements: [String: [Statement]] = [:]
+    var lastStatementsLoadingTime:[String: Date] = [:]
+    var loadingController: NSViewController?
     
     
     override func viewWillAppear() {
         super.viewWillAppear()
-        statementsTable.reloadData()
     }
     
     override func viewDidLoad() {
@@ -33,8 +39,14 @@ class ViewController: NSViewController & NSTableViewDataSource & NSTableViewDele
         
         fromDatePicker.dateValue = Date() - TimeInterval.init(60 * 60 * 24 * 30)
         
-        statementsTable.delegate = self
-        statementsTable.dataSource = self
+        tabs.delegate = self
+        
+        statementsTable = MonoStatementsTable(frame: NSRect())
+        statementsTable!.delegate = self
+        
+        for currency in [CurrencyCode.USD, .EUR, .RUB, .UAH] {
+            convertToSelect.addItem(withTitle: "\(currency)")
+        }
     }
 
     override var representedObject: Any? {
@@ -43,51 +55,81 @@ class ViewController: NSViewController & NSTableViewDataSource & NSTableViewDele
         }
     }
     
-    func numberOfRows(in tableView: NSTableView) -> Int {
-        return statements.count
+    func updateAccountsTabs() {
+        DispatchQueue.main.async() {
+            let typeMap = [
+                AccountType.black: "Black",
+                AccountType.white: "White",
+                AccountType.platinum: "Platinum",
+                AccountType.yellow: "Yellow",
+                AccountType.fop: "FOP",
+                AccountType.iron: "Iron",
+            ]
+            for tab in self.tabs.tabViewItems {
+                self.tabs.removeTabViewItem(tab)
+            }
+            for account in self.userInfo!.accounts {
+                let tab = NSTabViewItem(identifier: account.id)
+                tab.label = "\(typeMap[account.type]!) \(account.currencyCode)"
+                tab.view = self.statementsTable
+                self.tabs.addTabViewItem(tab)
+            }
+        }
     }
     
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let statement = self.statements[row]
-        var cellView: NSTableCellView = NSTableCellView()
-        switch tableColumn!.identifier {
-        case NSUserInterfaceItemIdentifier(rawValue: "dateColumn"):
-            cellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "dateCellView"),
-                                                      owner: self) as! NSTableCellView
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "HH:mm dd MMM"
-            cellView.textField?.stringValue = dateFormatter.string(from: statement.time)
-            
-        case NSUserInterfaceItemIdentifier(rawValue: "descriptionColumn"):
-            cellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "descriptionCellView"),
-                                                      owner: self) as! NSTableCellView
-            cellView.textField?.stringValue = statement.description
-            
-        case NSUserInterfaceItemIdentifier(rawValue: "amountUahColumn"):
-            cellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "amountUahCellView"),
-                                                      owner: self) as! NSTableCellView
-            let uahAmount = String(Double(statement.amount) / 100.0)
-            cellView.textField?.stringValue = uahAmount
-            
-        case NSUserInterfaceItemIdentifier(rawValue: "amountUsdColumn"):
-            cellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "amountUsdCellView"),
-                                                      owner: self) as! NSTableCellView
-            let amountInCents = self.api!.convertCurrency(amount: statement.amount, from: .UAH, to: .USD)
-            let usdAmount = String(Double(amountInCents) / 100.0)
-            cellView.textField?.stringValue = usdAmount
-            
-        case NSUserInterfaceItemIdentifier(rawValue: "balanceColumn"):
-            cellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "balanceCellView"),
-                                                      owner: self) as! NSTableCellView
-            let amountInCents = self.api!.convertCurrency(amount: statement.balance, from: .UAH, to: .USD)
-            let usdAmount = String(Double(amountInCents) / 100.0)
-            cellView.textField?.stringValue = usdAmount
-            
-        default:
-            break;
+    func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
+        print("Selected tab \(String(describing: tabViewItem?.identifier))")
+        if tabViewItem?.identifier != nil {
+            self.checkAndPullCurrentAccount()
         }
-        
-        return cellView
+    }
+    
+    func checkAndPullCurrentAccount() {
+        let currentTabId = tabs.selectedTabViewItem?.identifier as! String
+        if lastStatementsLoadingTime[currentTabId] == nil {
+            lastStatementsLoadingTime[currentTabId] = Date.distantPast
+        }
+        let fromDate = self.fromDatePicker.dateValue
+        if Date().distance(to: lastStatementsLoadingTime[currentTabId]!) < -60 * 10 || self.statements[currentTabId] == nil {
+            print("Making request to API")
+            showLoading()
+            self.api!.getStatements(account: currentTabId, from: fromDate) {(stats: [Statement]?, error: Bool) in
+                self.hideLoading()
+                if error {
+                    self.showError()
+                    return
+                }
+                self.lastStatementsLoadingTime[currentTabId] = Date()
+                self.statements[currentTabId] = stats!
+                self.updateTable()
+                
+            }
+        } else {
+            self.updateTable()
+        }
+    }
+    
+    func showLoading() {
+        DispatchQueue.main.async() {
+            let loadingView = NSView.init(frame: NSMakeRect(0, 0, 60, 60))
+            loadingView.wantsLayer = true
+            
+            let indicator = NSProgressIndicator.init(frame: NSMakeRect(10, 10, 40, 40))
+            indicator.isIndeterminate = true
+            indicator.style = .spinning
+            loadingView.addSubview(indicator)
+            self.loadingController = NSViewController.init()
+            self.loadingController!.view = loadingView
+            self.loadingController!.preferredContentSize = loadingView.frame.size
+            self.presentAsSheet(self.loadingController!)
+            indicator.startAnimation(nil)
+        }
+    }
+    
+    func hideLoading() {
+        DispatchQueue.main.async() {
+            self.dismiss(self.loadingController!)
+        }
     }
     
     func showError(_ text: String) {
@@ -106,10 +148,27 @@ class ViewController: NSViewController & NSTableViewDataSource & NSTableViewDele
     
     func updateTable() {
         DispatchQueue.main.async() {
-            self.statementsTable.reloadData()
+            if self.userInfo == nil {
+                return
+            }
+            let currentTabId = self.tabs.selectedTabViewItem?.identifier as! String
+            let account = self.userInfo!.accounts.first(where: {$0.id == currentTabId})!
+            let convertTo = CurrencyStrToCode[self.convertToSelect.selectedItem!.title]!
+            self.statementsTable?.displayStatements(stats: self.statements[currentTabId]!, currency: account.currencyCode, convertTo: convertTo)
         }
     }
+    
+    func convertCurrency(amount: LowestCurrencyDenomination, from: CurrencyCode, to: CurrencyCode) -> LowestCurrencyDenomination {
+        if from == to {
+            return amount
+        }
+        return self.api?.convertCurrency(amount: amount, from: from, to: to) ?? amount
+    }
 
+    @IBAction func updateConvertTo(_ sender: Any) {
+        self.updateTable()
+    }
+    
     @IBAction func pullData(_ sender: Any) {
         let apiKey = apiKeyField.stringValue
         if apiKey.count == 0 {
@@ -119,32 +178,16 @@ class ViewController: NSViewController & NSTableViewDataSource & NSTableViewDele
         UserDefaults.standard.set(apiKey, forKey: "apiKey")
         api = MonoAPI(apiKey: apiKey)
         
-        let loadingView = NSView.init(frame: NSMakeRect(0, 0, 60, 60))
-        loadingView.wantsLayer = true
-        
-        let indicator = NSProgressIndicator.init(frame: NSMakeRect(10, 10, 40, 40))
-        indicator.isIndeterminate = true
-        indicator.style = .spinning
-        loadingView.addSubview(indicator)
-        let loadingController = NSViewController.init()
-        loadingController.view = loadingView
-        self.presentAsSheet(loadingController)
-        indicator.startAnimation(nil)
-        
-        let fromDate = self.fromDatePicker.dateValue
-        
+        showLoading()
         api!.getExchangeRates() {(rates: [ExchangeRate]?, error: Bool) in
-            self.api!.getStatements(account: "0", from: fromDate) {(stats: [Statement]?, error: Bool) in
-                DispatchQueue.main.async() {
-                    self.dismiss(loadingController)
-                }
-                
-                if !error {
-                    self.statements = stats!
-                    self.updateTable()
-                } else {
+            self.api!.getUserInfo() {(info: UserInfo?, error: Bool)  in
+                self.hideLoading()
+                if error {
                     self.showError()
+                    return
                 }
+                self.userInfo = info!
+                self.updateAccountsTabs()
             }
         }
         

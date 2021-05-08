@@ -48,7 +48,6 @@ class MonoAPI {
         session.dataTask(with: request) { (data, response, error) in
             if let data = data {
                 do {
-//                    print(String(decoding: data, as: UTF8.self))
                     let decoder = JSONDecoder()
                     decoder.dateDecodingStrategy = .secondsSince1970
                     let json = try decoder.decode(T.self, from: data)
@@ -96,8 +95,9 @@ class MonoAPI {
     func convertCurrency(amount: LowestCurrencyDenomination,
                          from: CurrencyCode, to: CurrencyCode) -> LowestCurrencyDenomination {
         var multiplier: Double = 1.0
+        print("MonoAPI converting \(amount) \(from) to \(to)")
         for rate in exchangesCache {
-            if rate.currencyCodeA == from || rate.currencyCodeB == from{
+            if (rate.currencyCodeA == from && rate.currencyCodeB == to) || (rate.currencyCodeB == from && rate.currencyCodeA == to) {
                 if rate.rateCross != nil {
                     multiplier = rate.rateCross!
                 } else if rate.rateBuy != nil && rate.rateSell != nil {
@@ -110,8 +110,13 @@ class MonoAPI {
                 break
             }
         }
-        
-        return Int(Double(amount) / multiplier)
+        print("Multiplier \(multiplier)")
+        if (multiplier == 1) {
+            let fromInUah = self.convertCurrency(amount: amount, from: from, to: .UAH)
+            return self.convertCurrency(amount: fromInUah, from: .UAH, to: to)
+        } else {
+            return Int(Double(amount) / multiplier)
+        }
     }
     
 }
@@ -299,6 +304,13 @@ enum CurrencyCode: Int, Codable {
     case XAG = 961
     case ZMK = 894
 }
+
+let CurrencyStrToCode: [String: CurrencyCode] = [
+    "USD": .USD,
+    "UAH": .UAH,
+    "EUR": .EUR,
+    "RUB": .RUB
+]
 
 enum AccountType: String, Codable {
     case black
