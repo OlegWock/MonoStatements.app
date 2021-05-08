@@ -128,7 +128,9 @@ class ViewController: NSViewController & NSTabViewDelegate & MonoStatementsTable
     
     func hideLoading() {
         DispatchQueue.main.async() {
-            self.dismiss(self.loadingController!)
+            if self.presentedViewControllers?.contains(self.loadingController!) ?? false {
+                self.dismiss(self.loadingController!)
+            }
         }
     }
     

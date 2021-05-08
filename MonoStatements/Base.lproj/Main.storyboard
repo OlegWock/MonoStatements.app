@@ -721,7 +721,7 @@
                                 </connections>
                             </button>
                             <datePicker verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YKY-nV-CPM">
-                                <rect key="frame" x="800" y="751" width="97" height="28"/>
+                                <rect key="frame" x="800" y="751" width="104" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <datePickerCell key="cell" borderStyle="bezel" alignment="left" useCurrentDate="YES" id="ZQe-kd-dDQ">
                                     <font key="font" metaFont="system"/>

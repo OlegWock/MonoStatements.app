@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="StatementDetailsView" customModule="MonoStatements" customModuleProvider="target">
+            <connections>
+                <outlet property="amountLabel" destination="nVg-cE-L5h" id="AAp-0l-YnQ"/>
+                <outlet property="balanceLabel" destination="uhi-NI-nKf" id="hTI-Fe-rsv"/>
+                <outlet property="cashbackLabel" destination="aJV-dQ-8Y6" id="JEq-Py-CLK"/>
+                <outlet property="commentLabel" destination="0ot-QX-UYY" id="PB0-kl-Pkk"/>
+                <outlet property="commisionLabel" destination="HND-ph-8j2" id="eMG-eI-X2A"/>
+                <outlet property="contentView" destination="G4z-P5-d8N" id="SK3-Bu-ZrX"/>
+                <outlet property="descriptionLabel" destination="ewT-nF-rT0" id="fpU-PT-G5W"/>
+                <outlet property="edrpouLabel" destination="zqw-5q-df7" id="ied-WT-Kox"/>
+                <outlet property="holdLabel" destination="JWX-If-Wi8" id="dgR-mp-pDi"/>
+                <outlet property="ibanLabel" destination="Hah-yd-330" id="yDh-UQ-db0"/>
+                <outlet property="idLabel" destination="8ou-jY-2Ph" id="N9q-X2-Mdz"/>
+                <outlet property="mccLabel" destination="Xsk-F8-QZY" id="J6g-P0-JfI"/>
+                <outlet property="opAmountLabel" destination="JC5-Qh-WG3" id="XvJ-Ge-9FI"/>
+                <outlet property="receiptLabel" destination="CgQ-nl-Agu" id="QEm-LF-s3F"/>
+                <outlet property="timeLabel" destination="mVS-ks-Ccg" id="cmE-1t-bvL"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe">
+            <rect key="frame" x="0.0" y="0.0" width="355" height="463"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <scrollView fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G4z-P5-d8N">
+                    <rect key="frame" x="0.0" y="0.0" width="355" height="460"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <clipView key="contentView" id="FIX-gx-Tmg">
+                        <rect key="frame" x="1" y="1" width="338" height="443"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view id="oWX-0P-RMy">
+                                <rect key="frame" x="0.0" y="0.0" width="336" height="442"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="tRu-AG-AhW">
+                                        <rect key="frame" x="18" y="413" width="23" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="ID:" id="D9x-bD-yaZ">
+                                            <font key="font" metaFont="systemBold"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="90c-QL-d06">
+                                        <rect key="frame" x="18" y="393" width="41" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Time:" id="6qB-dh-2eR">
+                                            <font key="font" metaFont="systemBold"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="pGc-JJ-r5k">
+                                        <rect key="frame" x="18" y="369" width="84" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Description:" id="8Vn-ox-GYE">
+                                            <font key="font" metaFont="systemBold"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="hpx-XR-4th">
+                                        <rect key="frame" x="18" y="297" width="40" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="MCC:" id="hZ0-WF-mI9">
+                                            <font key="font" metaFont="systemBold"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="bug-XA-vVJ">
+                                        <rect key="frame" x="18" y="273" width="39" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Hold:" id="Dla-yq-AT9">
+                                            <font key="font" metaFont="systemBold"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="co3-MW-sqN">
+                                        <rect key="frame" x="18" y="249" width="126" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Operation amount:" id="pzd-oG-rrb">
+                                            <font key="font" metaFont="systemBold"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="8ou-jY-2Ph">
+                                        <rect key="frame" x="41" y="413" width="277" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" title="Label" id="Q6h-Y6-06K">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="mVS-ks-Ccg">
+                                        <rect key="frame" x="60" y="393" width="258" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" title="Label" id="iw1-IY-Vh1">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="ewT-nF-rT0">
+                                        <rect key="frame" x="107" y="321" width="211" height="64"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" selectable="YES" title="Label Label Label Label" id="6au-w2-0aO">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Xsk-F8-QZY">
+                                        <rect key="frame" x="60" y="297" width="258" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" title="Label" id="7Kf-8a-ISx">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="JWX-If-Wi8">
+                                        <rect key="frame" x="60" y="273" width="258" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" title="Label" id="GqU-Td-yfi">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="JC5-Qh-WG3">
+                                        <rect key="frame" x="148" y="249" width="170" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" title="Label" id="wCC-GE-0gY">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="EfC-wR-AT8">
+                                        <rect key="frame" x="19" y="225" width="138" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="In account currency:" id="kgx-Zn-S6n">
+                                            <font key="font" metaFont="systemBold"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="nVg-cE-L5h">
+                                        <rect key="frame" x="158" y="225" width="160" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" title="Label" id="Ob2-AC-dOT">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="VJc-x4-ftb">
+                                        <rect key="frame" x="19" y="201" width="81" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Commision:" id="snX-dt-pgP">
+                                            <font key="font" metaFont="systemBold"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="26Y-00-Yr0">
+                                        <rect key="frame" x="19" y="177" width="73" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Cashback:" id="Iiu-3g-fl3">
+                                            <font key="font" metaFont="systemBold"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Bv5-Qh-r5X">
+                                        <rect key="frame" x="19" y="153" width="60" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Balance:" id="IWe-Xp-Y3j">
+                                            <font key="font" metaFont="systemBold"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="nix-fs-bAq">
+                                        <rect key="frame" x="19" y="129" width="72" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Comment:" id="e1J-xe-Ulx">
+                                            <font key="font" metaFont="systemBold"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="OKB-N0-lxQ">
+                                        <rect key="frame" x="19" y="105" width="75" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Receipt ID:" id="I70-uY-LLb">
+                                            <font key="font" metaFont="systemBold"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="MUx-tL-UXs">
+                                        <rect key="frame" x="19" y="81" width="106" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Agent EDRPOU:" id="2D6-Ak-kkH">
+                                            <font key="font" metaFont="systemBold"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Rfe-E4-Vbj">
+                                        <rect key="frame" x="20" y="57" width="41" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="IBAN:" id="hdc-w6-6sp">
+                                            <font key="font" metaFont="systemBold"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="HND-ph-8j2">
+                                        <rect key="frame" x="104" y="201" width="214" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" title="Label" id="9Ke-cr-wa0">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="aJV-dQ-8Y6">
+                                        <rect key="frame" x="92" y="177" width="226" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" title="Label" id="FOD-sj-54N">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="uhi-NI-nKf">
+                                        <rect key="frame" x="80" y="153" width="238" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" title="Label" id="wYC-ib-Fxr">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="0ot-QX-UYY">
+                                        <rect key="frame" x="95" y="129" width="223" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" title="Label" id="mcH-fa-QNP">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="CgQ-nl-Agu">
+                                        <rect key="frame" x="96" y="105" width="222" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" title="Label" id="hH0-XS-cZK">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="zqw-5q-df7">
+                                        <rect key="frame" x="128" y="81" width="190" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" title="Label" id="dsx-2s-eZ8">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Hah-yd-330">
+                                        <rect key="frame" x="60" y="57" width="258" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" title="Label" id="tIB-eI-Fg9">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="to4-4k-mOS">
+                                        <rect key="frame" x="111" y="7" width="136" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="push" title="Copy info as text" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XW1-ft-7XN">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="copyAsText:" target="-2" id="gf0-yN-djf"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </view>
+                        </subviews>
+                    </clipView>
+                    <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="bm5-5H-ljp">
+                        <rect key="frame" x="1" y="444" width="338" height="15"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                    <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="VwP-bN-NnL">
+                        <rect key="frame" x="339" y="1" width="15" height="443"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                </scrollView>
+            </subviews>
+            <point key="canvasLocation" x="-2.5" y="249.5"/>
+        </customView>
+    </objects>
+</document>

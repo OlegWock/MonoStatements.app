@@ -12,16 +12,27 @@ protocol MonoStatementsTableDelegate {
 }
 
 
-class MonoStatementsTable: NSView & NSTabViewDelegate & NSTableViewDataSource & NSTableViewDelegate {
+class MonoStatementsTable: NSView & NSTableViewDataSource & NSTableViewDelegate {
     
     @IBOutlet var contentView: NSScrollView!
     @IBOutlet weak var table: NSTableView!
     @IBOutlet weak var convertedAmountColumn: NSTableColumn!
     @IBOutlet weak var balanceColumn: NSTableColumn!
-    var delegate: MonoStatementsTableDelegate? = nil
+    var _delegate: MonoStatementsTableDelegate? = nil
+    var delegate: MonoStatementsTableDelegate? {
+        get {
+            return self._delegate
+        }
+        set(newDelegate) {
+            self._delegate = newDelegate
+            self.statementDetails?.delegate = newDelegate
+        }
+    }
     var statements: [Statement] = []
     var accountCurrency: CurrencyCode = .UAH
     var convertTo: CurrencyCode = .USD
+    var popoverController: NSViewController? = nil
+    var statementDetails: StatementDetailsView? = nil
     
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
@@ -42,6 +53,16 @@ class MonoStatementsTable: NSView & NSTabViewDelegate & NSTableViewDataSource & 
         table.dataSource = self
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.height, .width]
+        
+        table.target = self
+        table.doubleAction = #selector(showStatementPopover)
+        
+        
+        popoverController = NSViewController.init()
+        statementDetails = StatementDetailsView(frame: NSRect())
+        popoverController!.view = statementDetails!
+        popoverController!.preferredContentSize = NSMakeSize(popoverController!.view.frame.size.width,
+                                                             popoverController!.view.frame.size.height);
     }
 
     override func draw(_ dirtyRect: NSRect) {
@@ -58,6 +79,22 @@ class MonoStatementsTable: NSView & NSTabViewDelegate & NSTableViewDataSource & 
         convertedAmountColumn.title = "Amount \(convertTo)"
         balanceColumn.title = "Balance \(convertTo)"
         self.table.reloadData()
+    }
+    
+    @objc func showStatementPopover() {
+        let row = table.clickedRow
+        if row == -1 {
+            return
+        }
+        let statement = statements[row]
+        if let rowView = table.rowView(atRow: row, makeIfNecessary: true) {
+            let popover = NSPopover()
+            popover.contentViewController = popoverController!
+            popover.behavior = .transient
+            popover.contentSize = NSSize(width: 355, height: 450)
+            statementDetails!.fillData(statement: statement, accountCurrency: accountCurrency)
+            popover.show(relativeTo: rowView.bounds, of: rowView, preferredEdge: .minX)
+        }
     }
     
     func convertCurrency(amount: LowestCurrencyDenomination, from: CurrencyCode, to: CurrencyCode) -> LowestCurrencyDenomination {

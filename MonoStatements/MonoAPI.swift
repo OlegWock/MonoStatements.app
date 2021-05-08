@@ -95,7 +95,6 @@ class MonoAPI {
     func convertCurrency(amount: LowestCurrencyDenomination,
                          from: CurrencyCode, to: CurrencyCode) -> LowestCurrencyDenomination {
         var multiplier: Double = 1.0
-        print("MonoAPI converting \(amount) \(from) to \(to)")
         for rate in exchangesCache {
             if (rate.currencyCodeA == from && rate.currencyCodeB == to) || (rate.currencyCodeB == from && rate.currencyCodeA == to) {
                 if rate.rateCross != nil {
@@ -110,7 +109,7 @@ class MonoAPI {
                 break
             }
         }
-        print("Multiplier \(multiplier)")
+
         if (multiplier == 1) {
             let fromInUah = self.convertCurrency(amount: amount, from: from, to: .UAH)
             return self.convertCurrency(amount: fromInUah, from: .UAH, to: to)
@@ -354,6 +353,7 @@ struct Statement: Decodable {
     let operationAmount: LowestCurrencyDenomination // Amount in original transaction's currency
     let currencyCode: CurrencyCode
     let commissionRate: LowestCurrencyDenomination
+    let cashbackAmount: LowestCurrencyDenomination
     let balance: LowestCurrencyDenomination
     let comment: String?
     let receiptId: String?
