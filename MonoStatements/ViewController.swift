@@ -64,6 +64,7 @@ class ViewController: NSViewController & NSTabViewDelegate & MonoStatementsTable
                 AccountType.yellow: "Yellow",
                 AccountType.fop: "FOP",
                 AccountType.iron: "Iron",
+                AccountType.eAid: "eAid"
             ]
             for tab in self.tabs.tabViewItems {
                 self.tabs.removeTabViewItem(tab)

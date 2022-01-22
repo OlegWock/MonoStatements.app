@@ -318,6 +318,7 @@ enum AccountType: String, Codable {
     case iron
     case fop
     case yellow
+    case eAid
 }
 
 enum CashbackType: String, Codable {
